@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 
 // Classe pour les cardes des prévisions
 class CardPrevisionItems extends StatelessWidget {
-  const CardPrevisionItems({super.key});
+  // paramètre de la classe dans le constructeur
+  final String houre;
+  final IconData icon;
+  final String temperature;
+  const CardPrevisionItems(
+      {super.key,
+      required this.houre,
+      required this.icon,
+      required this.temperature});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +21,16 @@ class CardPrevisionItems extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          children: const [
+          children: [
             Text(
-              "07:00",
-              style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+              houre,
+              style:
+                  const TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8.0),
-            Icon(Icons.cloud, size: 32),
-            SizedBox(height: 8.0),
-            Text("32°C"),
+            const SizedBox(height: 8.0),
+            Icon(icon, size: 32),
+            const SizedBox(height: 8.0),
+            Text(temperature),
           ],
         ),
       ),

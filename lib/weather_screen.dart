@@ -85,12 +85,36 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: const [
-                  CardPrevisionItems(),
-                  CardPrevisionItems(),
-                  CardPrevisionItems(),
-                  CardPrevisionItems(),
-                  CardPrevisionItems(),
-                  CardPrevisionItems(),
+                  CardPrevisionItems(
+                    houre: "06:18",
+                    icon: Icons.cloud,
+                    temperature: "06°C",
+                  ),
+                  CardPrevisionItems(
+                    houre: "07:18",
+                    icon: Icons.cloud,
+                    temperature: "15°C",
+                  ),
+                  CardPrevisionItems(
+                    houre: "08:18",
+                    icon: Icons.cloud,
+                    temperature: "17°C",
+                  ),
+                  CardPrevisionItems(
+                    houre: "09:18",
+                    icon: Icons.cloud,
+                    temperature: "23°C",
+                  ),
+                  CardPrevisionItems(
+                    houre: "10:18",
+                    icon: Icons.cloud,
+                    temperature: "26°C",
+                  ),
+                  CardPrevisionItems(
+                    houre: "11:18",
+                    icon: Icons.cloud,
+                    temperature: "32°C",
+                  ),
                 ],
               ),
             ),
@@ -108,9 +132,21 @@ class WeatherScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
-                AdditinoalInfoItems(),
-                AdditinoalInfoItems(),
-                AdditinoalInfoItems(),
+                AdditinoalInfoItems(
+                  icon: Icons.water_drop,
+                  label: "Humidité",
+                  value: "321°",
+                ),
+                AdditinoalInfoItems(
+                  icon: Icons.air,
+                  label: "Vitesse du vent",
+                  value: "7.9°",
+                ),
+                AdditinoalInfoItems(
+                  icon: Icons.beach_access,
+                  label: "Préssion",
+                  value: "1000°",
+                ),
               ],
             ),
           ],
