@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'additional_info_items.dart';
+import 'card_prevision_items.dart';
+
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
 
@@ -77,7 +80,7 @@ class WeatherScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 12.0),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -93,39 +96,23 @@ class WeatherScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Section infos
-            Placeholder(
-              fallbackHeight: 150,
+            // Section Informations supplémentaires
+            const Text(
+              "Informations supplémentaires",
+              style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Classe pour les cardes des prévisions
-class CardPrevisionItems extends StatelessWidget {
-  const CardPrevisionItems({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 6.0,
-      child: Container(
-        width: 100.0,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: const [
-            Text(
-              "07:00",
-              style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+            const SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const [
+                AdditinoalInfoItems(),
+                AdditinoalInfoItems(),
+                AdditinoalInfoItems(),
+              ],
             ),
-            SizedBox(height: 8.0),
-            Icon(Icons.cloud, size: 32),
-            SizedBox(height: 8.0),
-            Text("32°C"),
           ],
         ),
       ),
