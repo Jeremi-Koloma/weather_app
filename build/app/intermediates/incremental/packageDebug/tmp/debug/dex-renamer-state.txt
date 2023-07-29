@@ -1,4 +1,4 @@
-#Fri Jul 28 12:39:39 PDT 2023
+#Fri Jul 28 21:27:34 PDT 2023
 base.0=/Users/jeremi/Downloads/weather_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

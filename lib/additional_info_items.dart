@@ -19,11 +19,11 @@ class AdditinoalInfoItems extends StatelessWidget {
         Icon(icon, size: 32),
         const SizedBox(height: 8.0),
         Text(label),
-        const SizedBox(height: 8.0),
+        const SizedBox(height: 4.0),
         Text(
           value,
           style: const TextStyle(
-            fontSize: 16.0,
+            fontSize: 18.0,
             fontWeight: FontWeight.bold,
           ),
         ),
