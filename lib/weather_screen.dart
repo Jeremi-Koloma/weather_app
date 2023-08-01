@@ -81,7 +81,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
           }
           // Si tous va bien
           final data = snapshot.data!;
-          final currentTemperature = data['list'][0]['main']['temp'];
+          final currentWeatherData = data['list'][0];
+          final currentTemperature = currentWeatherData['main']['temp'];
+          final currentHumidity = currentWeatherData['main']['humidity'];
+          final currentPressure = currentWeatherData['main']['pressure'];
+          final currentSky = currentWeatherData['weather'][0]['main'];
+          final currentWindSpeed = currentWeatherData['wind']['speed'];
 
           return Padding(
             padding: const EdgeInsets.all(15.0),
@@ -112,14 +117,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 ),
                               ),
                               const SizedBox(height: 15.0),
-                              const Icon(
-                                Icons.cloud,
+                              Icon(
+                                currentSky == "Clouds" || currentSky == "Rain"
+                                    ? Icons.cloud
+                                    : Icons.sunny,
                                 size: 50.0,
                               ),
                               const SizedBox(height: 15),
-                              const Text(
-                                "Pluie",
-                                style: TextStyle(fontSize: 20.0),
+                              Text(
+                                "$currentSky",
+                                style: const TextStyle(fontSize: 20.0),
                               ),
                             ],
                           ),
@@ -141,37 +148,20 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: const [
-                      CardPrevisionItems(
-                        houre: "06:18",
-                        icon: Icons.cloud,
-                        temperature: "06°C",
-                      ),
-                      CardPrevisionItems(
-                        houre: "07:18",
-                        icon: Icons.cloud,
-                        temperature: "15°C",
-                      ),
-                      CardPrevisionItems(
-                        houre: "08:18",
-                        icon: Icons.cloud,
-                        temperature: "17°C",
-                      ),
-                      CardPrevisionItems(
-                        houre: "09:18",
-                        icon: Icons.cloud,
-                        temperature: "23°C",
-                      ),
-                      CardPrevisionItems(
-                        houre: "10:18",
-                        icon: Icons.cloud,
-                        temperature: "26°C",
-                      ),
-                      CardPrevisionItems(
-                        houre: "11:18",
-                        icon: Icons.cloud,
-                        temperature: "32°C",
-                      ),
+                    children: [
+                      for (int index = 0; index < 5; index++)
+                        CardPrevisionItems(
+                          houre: data['list'][index + 1]['dt'].toString(),
+                          icon: data['list'][index + 1]['weather'][0]['main'] ==
+                                      "Clouds" ||
+                                  data['list'][index + 1]['weather'][0]
+                                          ['main'] ==
+                                      'Rain'
+                              ? Icons.cloud
+                              : Icons.sunny,
+                          temperature: data['list'][index + 1]['main']['temp']
+                              .toString(),
+                        ),
                     ],
                   ),
                 ),
@@ -188,21 +178,21 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(height: 12.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
+                  children: [
                     AdditinoalInfoItems(
                       icon: Icons.water_drop,
                       label: "Humidité",
-                      value: "321°",
+                      value: currentHumidity.toString(),
                     ),
                     AdditinoalInfoItems(
                       icon: Icons.air,
                       label: "Vitesse du vent",
-                      value: "7.9°",
+                      value: currentWindSpeed.toString(),
                     ),
                     AdditinoalInfoItems(
                       icon: Icons.beach_access,
                       label: "Préssion",
-                      value: "1000°",
+                      value: currentPressure.toString(),
                     ),
                   ],
                 ),
