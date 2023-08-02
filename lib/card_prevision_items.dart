@@ -26,6 +26,8 @@ class CardPrevisionItems extends StatelessWidget {
               houre,
               style:
                   const TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 8.0),
             Icon(icon, size: 32),

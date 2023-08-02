@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_ap/secrets.dart';
 
 import 'additional_info_items.dart';
@@ -55,7 +56,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {});
+            },
             icon: const Icon(Icons.refresh),
           ),
         ],
@@ -118,7 +121,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               ),
                               const SizedBox(height: 15.0),
                               Icon(
-                                currentSky == "Clouds" || currentSky == "Rain"
+                                currentSky == "Clouds" || currentSky == "Rains"
                                     ? Icons.cloud
                                     : Icons.sunny,
                                 size: 50.0,
@@ -135,35 +138,37 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 22.0),
                 // card des Prévisions
                 const Text(
-                  "Prévisions météorologiques",
+                  "Prévisions horaires",
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 12.0),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int index = 0; index < 5; index++)
-                        CardPrevisionItems(
-                          houre: data['list'][index + 1]['dt'].toString(),
-                          icon: data['list'][index + 1]['weather'][0]['main'] ==
-                                      "Clouds" ||
-                                  data['list'][index + 1]['weather'][0]
-                                          ['main'] ==
-                                      'Rain'
+                SizedBox(
+                  height: 120.0,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        final hourlyForescast = data['list'][index + 1];
+                        final hourlySky =
+                            data['list'][index + 1]['weather'][0]['main'];
+                        final hourlyTemperature =
+                            hourlyForescast['main']['temp'].toString();
+                        final hourlyTime = DateTime.parse(
+                            hourlyForescast['dt_txt'].toString());
+                        return CardPrevisionItems(
+                          houre: DateFormat.Hm().format(hourlyTime),
+                          icon: hourlySky == "Clouds" || hourlySky == "Rains"
                               ? Icons.cloud
                               : Icons.sunny,
-                          temperature: data['list'][index + 1]['main']['temp']
-                              .toString(),
-                        ),
-                    ],
-                  ),
+                          temperature: hourlyTemperature,
+                        );
+                      }),
                 ),
                 const SizedBox(height: 20),
 
